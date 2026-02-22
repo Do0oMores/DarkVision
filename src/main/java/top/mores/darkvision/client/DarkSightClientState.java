@@ -36,11 +36,14 @@ public class DarkSightClientState {
         active = true;
         remainingTicks = durationTicks;
         // 可按mode切不同滤镜强度
+        lastSeq=0;
+        targets.clear();
     }
 
     public static void end(){
         active = false;
         remainingTicks = 0;
+        lastSeq=0;
         targets.clear();
         pulseStrength = 0f;
         pulseTicks = 0;
