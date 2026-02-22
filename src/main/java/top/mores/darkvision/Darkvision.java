@@ -28,6 +28,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+import top.mores.darkvision.client.DarkSightClient;
 import top.mores.darkvision.net.DarkSightNet;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -112,6 +113,7 @@ public class Darkvision {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            event.enqueueWork(DarkSightClient::registerForgeBus);
         }
     }
 }
