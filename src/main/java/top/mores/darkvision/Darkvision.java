@@ -114,6 +114,7 @@ public class Darkvision {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             event.enqueueWork(DarkSightClient::registerForgeBus);
+            event.enqueueWork(() -> MinecraftForge.EVENT_BUS.register(top.mores.darkvision.client.DarkSightWorldRenderer.class));
         }
     }
 }

@@ -56,7 +56,6 @@ public final class DarkSightClient {
 
             if (DARKSIGHT_KEY == null) return;
             boolean down = DARKSIGHT_KEY.isDown();
-            if (down && !lastDown) DarkSightClientState.start(200, (byte)0);
             if (down && !lastDown) {
                 DarkSightNet.CHANNEL.sendToServer(new C2S_ToggleDarkSight(C2S_ToggleDarkSight.Action.PRESS));
             } else if (!down && lastDown) {

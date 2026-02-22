@@ -23,5 +23,13 @@ public final class DarkSightHudRenderer {
             int pad = 70;
             gg.fill(pad, pad, w - pad, h - pad, (alpha << 24)); // 只有 alpha 的黑层
         }
+
+        gg.drawString(
+                net.minecraft.client.Minecraft.getInstance().font,
+                "targets=" + top.mores.darkvision.client.DarkSightClientState.getTargets().size(),
+                6, 6,
+                0xFFFFFF,
+                true
+        );
     }
 }

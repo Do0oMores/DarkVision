@@ -26,7 +26,7 @@ public class S2C_DarkSightStart {
     }
 
     public static void handle(S2C_DarkSightStart msg, Supplier<NetworkEvent.Context> ctxSup) {
-        ctxSup.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT, () -> () -> DarkSightClientState.start(msg.durationTicks, msg.mode)));
+        ctxSup.get().enqueueWork(() -> DarkSightClientState.start(msg.durationTicks, msg.mode));
         ctxSup.get().setPacketHandled(true);
     }
 }
