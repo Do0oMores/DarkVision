@@ -34,11 +34,6 @@ public class DarkSightWorldRenderer {
         // 轻微呼吸闪烁：基于世界时间
         float time = (mc.level.getGameTime() + e.getPartialTick()) * 0.15f;
 
-        // 渲染准备
-        PoseStack poseStack = e.getPoseStack();
-        poseStack.pushPose();
-        poseStack.translate(-cam.x, -cam.y, -cam.z);
-
         // 我们用半透明三角形渲染一个贴地“十字残影”
         //（后续你换成纹理环形即可）
         BufferBuilder bb = Tesselator.getInstance().getBuilder();
@@ -59,9 +54,10 @@ public class DarkSightWorldRenderer {
             if (distSq > 80.0 * 80.0) continue;
 
             // 残影点位置（贴地略抬高避免Z-fighting）
-            double x = pos.getX() + 0.5;
-            double y = pos.getY() + 0.05; // 贴地
-            double z = pos.getZ() + 0.5;
+            // RenderLevelStageEvent 使用相机相对坐标，必须减去相机位置。
+            double x = (pos.getX() + 0.5) - cam.x;
+            double y = (pos.getY() + 0.05) - cam.y; // 贴地
+            double z = (pos.getZ() + 0.5) - cam.z;
 
             // 强度：0..1
             float s = clamp01(te.strength01);
@@ -88,7 +84,6 @@ public class DarkSightWorldRenderer {
         // 提交
         BufferUploader.drawWithShader(bb.end());
 
-        poseStack.popPose();
     }
 
     private static void addQuad(BufferBuilder bb,
