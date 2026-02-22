@@ -1,7 +1,7 @@
 package top.mores.darkvision.client;
 
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ClientTickEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.mores.darkvision.Darkvision;
@@ -11,8 +11,8 @@ public final class DarkSightClientTicker {
     private DarkSightClientTicker() {}
 
     @SubscribeEvent
-    public static void onClientTick(ClientTickEvent event) {
-        if (event.phase == ClientTickEvent.Phase.END) {
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
             DarkSightClientState.clientTick();
         }
     }
