@@ -4,9 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import top.mores.darkvision.Darkvision;
 
 import java.util.*;
 
+@Mod.EventBusSubscriber(modid = Darkvision.MODID)
 public class EchoTracker {
     private EchoTracker() {}
 

@@ -1,6 +1,7 @@
 package top.mores.darkvision.net;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 import top.mores.darkvision.client.DarkSightClientState;
 
@@ -25,7 +26,7 @@ public class S2C_DarkSightPulse {
     }
 
     public static void handle(S2C_DarkSightPulse msg, Supplier<NetworkEvent.Context> ctxSup) {
-        ctxSup.get().enqueueWork(() -> DarkSightClientState.pulse(msg.strength));
+        ctxSup.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT, () -> () -> DarkSightClientState.pulse(msg.strength)));
         ctxSup.get().setPacketHandled(true);
     }
 }
