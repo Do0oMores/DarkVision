@@ -9,7 +9,7 @@ public class DarkSightNet {
 
     public static final String PROTOCOL = "1";
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation("pacthunt", "darksight"),
+            new ResourceLocation("darkvision", "darksight"),
             () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals
     );
 

@@ -2,6 +2,7 @@ package top.mores.darkvision.net;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 import top.mores.darkvision.client.DarkSightClientState;
 
@@ -48,7 +49,7 @@ public class S2C_DarkSightTargets {
     }
 
     public static void handle(S2C_DarkSightTargets msg, Supplier<NetworkEvent.Context> ctxSup) {
-        ctxSup.get().enqueueWork(() -> DarkSightClientState.updateTargets(msg.seq, msg.targets));
+        ctxSup.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT, () -> () -> DarkSightClientState.updateTargets(msg.seq, msg.targets)));
         ctxSup.get().setPacketHandled(true);
     }
 }

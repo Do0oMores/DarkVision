@@ -3,16 +3,19 @@ package top.mores.darkvision.client;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import top.mores.darkvision.Darkvision;
 
 import java.util.Map;
 
 import static java.lang.Math.sin;
 
+@Mod.EventBusSubscriber(modid = Darkvision.MODID, value = Dist.CLIENT)
 public class DarkSightWorldRenderer {
     // type=4 回声点
     private static final byte TYPE_ECHO = 4;
@@ -39,7 +42,6 @@ public class DarkSightWorldRenderer {
         // 我们用半透明三角形渲染一个贴地“十字残影”
         //（后续你换成纹理环形即可）
         BufferBuilder bb = Tesselator.getInstance().getBuilder();
-        RenderType rt = RenderType.translucent();
         // 某些环境下需要手动设置shader
         com.mojang.blaze3d.systems.RenderSystem.setShader(GameRenderer::getPositionColorShader);
 

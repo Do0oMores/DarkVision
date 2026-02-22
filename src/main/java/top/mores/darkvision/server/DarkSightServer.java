@@ -4,11 +4,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
+import top.mores.darkvision.Darkvision;
 import top.mores.darkvision.net.*;
 
 import java.util.*;
 
+@Mod.EventBusSubscriber(modid = Darkvision.MODID)
 public class DarkSightServer {
     private DarkSightServer() {}
 
@@ -47,14 +50,17 @@ public class DarkSightServer {
 
     private static boolean isInHuntWorld(Level level) {
         // MVP：对局世界名前缀判断；后续改成 BridgeAPI: plugin.isInMatch(uuid)
-        return level.dimension().location().getPath().contains("overworld") // 你也可以换成 worldName 检测
-                || true;
+        return level.dimension().location().getPath().contains("overworld");
     }
 
     @SubscribeEvent
     public static void onServerPlayerTick(TickEvent.PlayerTickEvent e) {
         if (!(e.player instanceof ServerPlayer sp)) return;
         if (e.phase != TickEvent.Phase.END) return;
+
+        if (sp.tickCount % 10 == 0) {
+            EchoTracker.sample(sp);
+        }
 
         Active a = active.get(sp.getUUID());
         if (a == null) return;
