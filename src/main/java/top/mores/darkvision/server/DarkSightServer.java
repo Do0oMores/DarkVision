@@ -50,7 +50,8 @@ public class DarkSightServer {
 
     private static boolean isInHuntWorld(Level level) {
         // MVP：对局世界名前缀判断；后续改成 BridgeAPI: plugin.isInMatch(uuid)
-        return level.dimension().location().getPath().contains("overworld");
+        //return level.dimension().location().getPath().contains("overworld");
+        return true;
     }
 
     @SubscribeEvent
